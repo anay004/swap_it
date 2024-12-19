@@ -71,7 +71,12 @@ class _UserLoginState extends State<UserLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        // decoration: const BoxDecoration(
+         decoration: const BoxDecoration(
+           image: DecorationImage(
+             image: AssetImage('assets/images/bg2.jpg'), // Path to your background image
+             fit: BoxFit.cover, // Ensures the image covers the entire screen
+           ),
+
         //   // gradient: LinearGradient(
         //   //   colors: [Colors.black, Colors.blueGrey],
         //   //   begin: Alignment.topLeft,
@@ -81,8 +86,8 @@ class _UserLoginState extends State<UserLogin> {
         //     image: AssetImage('moroccan-flower-dark.png'), // Path to your pattern
         //     repeat: ImageRepeat.repeat, // Repeats the pattern
         //   ),
-        // ),
-        color: Theme.of(context).colorScheme.primaryFixedDim,
+        ),
+        // color: Theme.of(context).colorScheme.primaryFixedDim,
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(16.0), // Padding around the card

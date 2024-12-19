@@ -15,7 +15,7 @@ class _AdminLoginState extends State<AdminLogin> {
 
   // Check if credentials are correct
   void _checkCredentials() {
-    if (emailController.text == "admin@swapit.com" &&
+    if (emailController.text == "admin@gmail.com" &&
         passwordController.text == "admin123") {
       Navigator.push(
         context,
@@ -32,14 +32,18 @@ class _AdminLoginState extends State<AdminLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        // decoration: const BoxDecoration(
-        //   gradient: LinearGradient(
-        //     colors: [Colors.black87, Colors.blueGrey],
-        //     begin: Alignment.topLeft,
-        //     end: Alignment.bottomRight,
-        //   ),
-        // ),
-        color: Theme.of(context).colorScheme.primaryFixedDim,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/bg2.jpg'), // Path to your background image
+            fit: BoxFit.cover, // Ensures the image covers the entire screen
+          ),
+          //   gradient: LinearGradient(
+          //     colors: [Colors.blue.shade200, Colors.blueGrey],
+          //     begin: Alignment.topLeft,
+          //     end: Alignment.bottomRight,
+          //   ),
+        ),
+        //color: Theme.of(context).colorScheme.primaryFixedDim,
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
@@ -79,7 +83,7 @@ class _AdminLoginState extends State<AdminLogin> {
                           hintText: "Enter Email",
                           prefixIcon: const Icon(Icons.email),
                           filled: true,
-                          fillColor: Colors.grey[200],
+                          //fillColor: Colors.grey[200],
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide.none,
@@ -96,7 +100,7 @@ class _AdminLoginState extends State<AdminLogin> {
                           hintText: "Enter Password",
                           prefixIcon: const Icon(Icons.lock),
                           filled: true,
-                          fillColor: Colors.grey[200],
+                          //fillColor: Colors.grey[200],
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide.none,

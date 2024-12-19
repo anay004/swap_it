@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:swap_it/services/firebase_service.dart';
+import 'package:swap_it/splash_screen.dart';
 import 'package:swap_it/userpage/user_login.dart';
 import 'models/user.dart'; // Import UserModel
 import 'providers/user_provider.dart'; // Import UserProvider
@@ -78,7 +79,7 @@ class MyApp extends StatelessWidget {
       //     textTheme: GoogleFonts.lobsterTextTheme()
       // ),
       themeMode: ThemeMode.system,
-      home: const UserLogin(), // Ensure UserLogin is the starting screen
+      home:  SplashScreen(), // Ensure UserLogin is the starting screen
     );
   }
 }

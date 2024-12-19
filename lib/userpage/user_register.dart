@@ -33,6 +33,7 @@ class _UserRegisterState extends State<UserRegister> {
             email: email!,
             phone: phone ?? '',
             userImage: '',
+
           );
 
           ScaffoldMessenger.of(context).showSnackBar(
@@ -61,14 +62,18 @@ class _UserRegisterState extends State<UserRegister> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        // decoration: BoxDecoration(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/bg2.jpg'), // Path to your background image
+            fit: BoxFit.cover, // Ensures the image covers the entire screen
+          ),
         //   gradient: LinearGradient(
         //     colors: [Colors.blue.shade200, Colors.blueGrey],
         //     begin: Alignment.topLeft,
         //     end: Alignment.bottomRight,
         //   ),
-        // ),
-        color: Theme.of(context).colorScheme.primaryFixedDim,
+         ),
+        //color: Theme.of(context).colorScheme.primaryFixedDim,
         child: Center(
           child: SingleChildScrollView(
             child: Card(

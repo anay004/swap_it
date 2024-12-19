@@ -19,8 +19,7 @@ class UserProfile extends StatefulWidget {
 class _UserProfileState extends State<UserProfile> {
   File? profileImage;
   String? email, phone, name;
-  FilePickerResult? _filePickerResult;
-  dynamic userImage;
+  dynamic userImage; // User image URL
 
   @override
   void initState() {
@@ -38,10 +37,7 @@ class _UserProfileState extends State<UserProfile> {
           name = userData.name;
           email = userData.email;
           phone = userData.phone;
-
-          if (userData.userImage != null) {
-            profileImage = File(userData.userImage! as String);
-          }
+          userImage = userData.userImage; // Fetching saved user image URL
         });
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -65,22 +61,114 @@ class _UserProfileState extends State<UserProfile> {
       );
 
       setState(() {
-        _filePickerResult = result;
+        profileImage = File(result!.files.single.path!);
       });
-      dynamic results = await uploadToCloudinary(_filePickerResult);
-      setState(() {
-        userImage = results;
-      });
-      print("result is : $results");
+
+      dynamic results = await uploadToCloudinary(result);
       if (results != null) {
-        const SnackBar(content: Text("No file selected"));
+        setState(() {
+          userImage = results['url']; // Update with the Cloudinary image URL
+        });
       }
+
     } catch (e) {
       print("Error picking file: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Failed to pick file")),
       );
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final primaryColor = theme.colorScheme.primary;
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: primaryColor,
+        title: const Text("User Profile", style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),),
+      ),
+      body: Container(
+        color: Theme.of(context).colorScheme.primaryFixedDim,
+
+        padding: const EdgeInsets.all(57.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: _openFilePicker,
+              child: Stack(
+                children: [
+                  CircleAvatar(
+                    radius: 80,
+                    backgroundImage: userImage != null
+                        ? NetworkImage(userImage) // Using NetworkImage here
+                        : null,
+                    child: userImage == null
+                        ? const Icon(
+                      Icons.camera_alt,
+                      size: 50,
+                      color: Colors.grey,
+                    )
+                        : null,
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: CircleAvatar(
+                      backgroundColor: primaryColor,
+                      radius: 20,
+                      child: const Icon(
+                        Icons.edit,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              name ?? 'User Name',
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              email ?? 'Email not available',
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              phone ?? 'Phone not available',
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 40),
+            ElevatedButton.icon(
+              onPressed: _logout,
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 40, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              icon: const Icon(Icons.logout),
+              label: const Text(
+                "Logout",
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void _logout() async {
@@ -91,96 +179,7 @@ class _UserProfileState extends State<UserProfile> {
           (route) => false,
     );
   }
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final primaryColor = theme.colorScheme.primary;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("User Profile"),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: _openFilePicker,
-                child: Stack(
-                  children: [
-                    CircleAvatar(
-                      radius: 80,
-                      child: ClipOval(
-                        child: _filePickerResult != null
-                            ? Image.file(
-                          File(_filePickerResult!.files.single.path!),
-                          fit: BoxFit.cover,
-                          width: 150,
-                          height: 150,
-                        )
-                            : const Icon(
-                          Icons.camera_alt,
-                          size: 50,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: CircleAvatar(
-                        backgroundColor: primaryColor,
-                        radius: 20,
-                        child: const Icon(
-                          Icons.edit,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                name ?? 'User Name',
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                email ?? 'Email not available',
-                style: const TextStyle(fontSize: 18),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                phone ?? 'Phone not available',
-                style: const TextStyle(fontSize: 18),
-              ),
-              const SizedBox(height: 40),
-              ElevatedButton.icon(
-                onPressed: _logout,
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 40, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                icon: const Icon(Icons.logout),
-                label: const Text(
-                  "Logout",
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 }
+
+
+

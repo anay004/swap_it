@@ -53,25 +53,36 @@ class _UserDashboardState extends State<UserDashboard> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: primaryColor,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const Text(
               "Swap It",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,
+              color: Colors.white),
             ),
           ],
         ),
         centerTitle: true,
 
       ),
-      body: Stack(
-        children: [
-          pages[_currentIndex],
-        ],
+      body: Container(
+
+        color: Theme.of(context).colorScheme.primaryFixedDim,
+        child: Stack(
+          children: [
+            pages[_currentIndex],
+          ],
+        ),
       ),
       drawer: Drawer(
-        child: UserProfile(userEmail: widget.loggedInUser.email), // Drawer content with UserProfile
+        child: Theme(
+          data: Theme.of(context).copyWith(
+            iconTheme: IconThemeData(color: Colors.blue), // Set your desired color here
+          ),
+          child: UserProfile(userEmail: widget.loggedInUser.email), // Drawer content with UserProfile
+        ),
       ),
       bottomNavigationBar: ConvexAppBar(
         style: TabStyle.react,

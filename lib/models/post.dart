@@ -9,8 +9,8 @@ class PostModel {
   final int? likes;
   final DateTime? dateCreated;
   final List<String> likedBy;
-  final List<String>? comments;
-  final List<String>? commentBy;
+  late final List<String>? comments;
+  late final List<String>? commentBy;
 
   PostModel({
     this.email,

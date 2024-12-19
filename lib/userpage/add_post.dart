@@ -129,12 +129,17 @@ class _AddPostState extends State<AddPost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Center(
-            child: Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Container(
+      body: Container(
+        color: Theme.of(context).colorScheme.primaryFixedDim,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SingleChildScrollView( // Make the entire content scrollable if it overflows
+              child: Card(
+                elevation: 8, // Adds shadow to the card
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
@@ -154,27 +159,25 @@ class _AddPostState extends State<AddPost> {
                       _buildTextField(descriptionController, "Description", maxLines: 3),
                       SizedBox(height: 10),
                       productImage != null
-                          ? Image.network(
-                        productImage,
-                        height: 100,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
+                          ? Container(
+                        height: 200, // Set a fixed height for the image box
+                        child: SingleChildScrollView(
+                          child: Image.network(
+                            productImage,
+                            width: double.infinity,
+                            fit: BoxFit.contain, // Ensures the image maintains its aspect ratio
+                          ),
+                        ),
                       )
                           : ElevatedButton.icon(
                         onPressed: _openFilePicker,
                         icon: Icon(Icons.photo),
-                        label: Text(
-                          "Add Image",
-                          style: TextStyle(),
-                        ),
+                        label: Text("Add Image"),
                       ),
                       const SizedBox(height: 10),
                       ElevatedButton(
                         onPressed: _submitPost,
-                        child: Text(
-                          "Submit",
-                          style: TextStyle(),
-                        ),
+                        child: Text("Submit"),
                       ),
                     ],
                   ),
@@ -182,7 +185,7 @@ class _AddPostState extends State<AddPost> {
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
