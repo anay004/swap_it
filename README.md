@@ -29,7 +29,6 @@ Admin login
 
 ![Screenshot_2024-12-20-02-19-00-11_22d9a9e0a81b63e41352ec6db1122371](https://github.com/user-attachments/assets/59ef16ba-ecae-4477-8333-edbfd355a191)
 
-![Screenshot_2024-12-20-02-20-12-59_22d9a9e0a81b63e41352ec6db1122371](https://github.com/user-attachments/assets/5c16e1f2-1fdc-40ed-b842-28701af438ef)
 
 ![Screenshot_2024-12-20-02-32-28-26_22d9a9e0a81b63e41352ec6db1122371](https://github.com/user-attachments/assets/a604ca63-1c98-494e-9b01-29e0e734ce15)
 
