@@ -34,7 +34,4 @@ Admin login
 
 ![Screenshot_2024-12-20-02-59-17-00_22d9a9e0a81b63e41352ec6db1122371](https://github.com/user-attachments/assets/1b8ff6be-14c6-400f-ba85-04ce5f8d2559)
 
-![image_2024-12-20_03-26-09](https://github.com/user-attachments/assets/b146c1e3-020a-44ce-9492-a3ca4df6c36e)
-
-![image_2024-12-20_03-25-23](https://github.com/user-attachments/assets/768c6be2-4341-47d3-bcbf-dd5d34a65e25)
 
