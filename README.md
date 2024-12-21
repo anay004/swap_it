@@ -38,9 +38,3 @@ Admin login
 
 ![image_2024-12-20_03-25-23](https://github.com/user-attachments/assets/768c6be2-4341-47d3-bcbf-dd5d34a65e25)
 
-![image_2024-12-20_03-22-40]
-(https://github.com/user-attachments/assets/090fd13b-57d1-4877-941e-090cc8ec0d2b)
-
-![image_2024-12-20_03-21-45](https://github.com/user-attachments/assets/6801f1b2-d6c8-40cf-8349-6592770799f6)
-
-![image_2024-12-20_03-21-12](https://github.com/user-attachments/assets/438aa132-636d-40ce-9e14-c8cccc306d64)
